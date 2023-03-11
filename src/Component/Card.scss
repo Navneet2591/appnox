@@ -1,0 +1,24 @@
+.ant-card{
+    border: 1px solid #e8e8e8;
+    .ant-card-cover{
+        background: #fafafa;
+    }
+    .ant-card-actions {
+        background: #fafafa;
+        border-top-color: #e8e8e8;
+        .icon_btn{
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+}
+.card_info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    span{
+        margin-right: 10px;
+    }
+}

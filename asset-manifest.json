@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/appnox/static/css/main.ce1213c3.css",
+    "main.js": "/appnox/static/js/main.032b8f9b.js",
+    "static/js/787.f00b31a6.chunk.js": "/appnox/static/js/787.f00b31a6.chunk.js",
+    "index.html": "/appnox/index.html",
+    "main.ce1213c3.css.map": "/appnox/static/css/main.ce1213c3.css.map",
+    "main.032b8f9b.js.map": "/appnox/static/js/main.032b8f9b.js.map",
+    "787.f00b31a6.chunk.js.map": "/appnox/static/js/787.f00b31a6.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce1213c3.css",
+    "static/js/main.032b8f9b.js"
+  ]
+}

@@ -1,10 +1,10 @@
 import React from 'react'
-import { DeleteOutlined, EditOutlined, EllipsisOutlined, GlobalOutlined, HeartOutlined, MailOutlined, PhoneOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card } from 'antd';
-import "./Card.scss"; 
-const { Meta } = Card;
-const SingleCard = ({user, handleDeleteUser, handleEdit}) => {
-   const {id, name, email, phone, website} = user; 
+import { DeleteOutlined, EditOutlined, GlobalOutlined, HeartFilled, HeartOutlined, MailOutlined, PhoneOutlined } from '@ant-design/icons';
+import {  Card } from 'antd';
+import "./Card.scss";  
+const SingleCard = ({user, handleDeleteUser, handleEdit, handleWishlist}) => {
+   const {name, username, wishlist,  email, phone, website} = user; 
+   
     return (
         <>
             <Card  
@@ -15,11 +15,11 @@ const SingleCard = ({user, handleDeleteUser, handleEdit}) => {
                      width={200}
                      height={200}
                         alt="example"
-                        src={`https://avatars.dicebear.com/v2/avataaars/${name}.svg?options[mood][]=happy`}
+                        src={`https://avatars.dicebear.com/v2/avataaars/${username}.svg?options[mood][]=happy`}
                     />
                 }
                 actions={[
-                    <button className='icon_btn' ><HeartOutlined key="heart" style={{fontSize:18, color:'red'}} /></button>, 
+                    <button className='icon_btn'onClick={handleWishlist} >{wishlist ?<HeartFilled key="heart" style={{fontSize:18, color:'red'}} /> :<HeartOutlined key="heart" style={{fontSize:18, color:'red'}} />}</button>, 
                     <button className='icon_btn' onClick={handleEdit}><EditOutlined key="edit"  style={{fontSize:18, color:'blue'}}/></button> ,
                     <button className='icon_btn' onClick={handleDeleteUser}><DeleteOutlined key="ellipsis" style={{fontSize:18, color:'red'}} /></button> ,
                 ]}

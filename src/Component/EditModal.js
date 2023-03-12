@@ -1,28 +1,17 @@
-import React, {useState, useEffect} from 'react'
-import { Button, Col, Form, Input, Modal, Row } from 'antd';
+import React, {useEffect} from 'react'
+import { Button,  Form, Input, Modal, } from 'antd';
 import "./Modal.scss";  
-const EditModal = ({loading, handleCancel, isModalOpen, onFinish, values}) => {
-   
-const [initialValue, setInitialValue] = useState({
-  name:'',
-  email:'',
-  phone:'',
-  website:''
-})  
-
+const EditModal = ({  handleCancel, isModalOpen, onFinish, values}) => {
+    
 const [form] = Form.useForm(); 
  useEffect(() => {
   form.setFieldsValue(values)
   form.resetFields();
  
-}, [form, values])
-useEffect(() => { 
-  setInitialValue(values)
-}, [values]);
+}, [form, values])  
 
-  console.log(initialValue);
   return (
-    <Modal title={'Basic Modal'} open={isModalOpen}  onCancel={handleCancel}
+    <Modal forceRender title={'Basic Modal'} open={isModalOpen}  onCancel={handleCancel}
     style={{padding:0}} maskStyle={{padding:0}}
     footer={[
       <Button   key="back" onClick={handleCancel}>
@@ -35,13 +24,12 @@ useEffect(() => {
     >
         <Form
           form={form}
-          initialValues={initialValue}
+          initialValues={values}
           id='myForm'
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           onFinish={onFinish}
-           >
-            {console.log(initialValue)}
+           > 
              <Form.Item 
                 label="Name"
                 name="name"
@@ -51,7 +39,14 @@ useEffect(() => {
             <Form.Item 
                 label="Email"
                 name="email"
-                rules={[{ required: true, message: 'Please enter Email' }]}
+                rules={[{
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please Enter your E-mail!',
+                },]}
                 ><Input   name="email"  placeholder='Enter your Email'/>
             </Form.Item>
             <Form.Item 

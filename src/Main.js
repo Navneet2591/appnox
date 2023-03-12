@@ -9,18 +9,21 @@ const Main = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [values, setValues] = useState({});
+  const [values, setValues] = useState(null);
 
   useEffect(() => {
     const url = 'https://jsonplaceholder.typicode.com/users';
     function fetchData(url) {
       let getData = axios.get(url);
       getData.then((res) => {
-        setData(res.data);
+        let apiData = [...res.data];
+        let data = apiData.map((obj)=>{return{...obj, wishlist:false}}); 
+        setData(data);
         setLoading(false)
       }).catch((err) => {
-        setError(err);
-        setData(null);
+        
+        setError(err); 
+        setLoading(false)
       })
     }
     fetchData(url);
@@ -34,7 +37,7 @@ const Main = () => {
   const handleEdit = (i) => {
     console.log(data[i]);
     setValues(data[i]);
-   setIsModalOpen(true)
+    setIsModalOpen(true)
   }
 
   const onFinish = (value) => {
@@ -50,22 +53,29 @@ const Main = () => {
   const handleCancel = ()=>{
     setIsModalOpen(false); 
     setValues({})
+  } 
+  const handleWishlist = (i)=>{
+    let newData = [...data];
+    newData[i].wishlist = !newData[i].wishlist;
+    setData(newData);
   }
 
   return (
     <>
       {loading && <div className="spinner"></div>}
       {error && (<div>{`There is a problem fetching the post data - ${error}`}</div>)}
-      {!loading && <Row>
+      {!loading  && !error && <Row>
         {
           data && data.map((user, index) => {
             return (
-              <Col xs={24} sm={24} md={12} lg={8} xl={6} key={index}><SingleCard user={user} handleDeleteUser={() => { handleDeleteUser(index) }} handleEdit={() => { handleEdit(index) }} /></Col>
+              <Col xs={24} sm={24} md={12} lg={8} xl={6} key={user.id}><SingleCard user={user} handleDeleteUser={() => { handleDeleteUser(index) }} handleEdit={() => { handleEdit(index) }}
+              handleWishlist={()=>{handleWishlist(index)}}
+              /></Col>
             )
           })
         }
       </Row>}
-      <EditModal  values={values} isModalOpen={isModalOpen} handleCancel={handleCancel} onFinish={onFinish} loading={loading} />
+      <EditModal  values={values && values} isModalOpen={isModalOpen} handleCancel={handleCancel} onFinish={onFinish}  />
     </>
   )
 }
